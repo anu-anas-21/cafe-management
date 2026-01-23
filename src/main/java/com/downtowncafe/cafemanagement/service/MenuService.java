@@ -20,7 +20,7 @@ public class MenuService {
         return repo.findAll();
     }  
 
-    public MenuItem save(MenuItem item) {
+    public MenuItem addMenu(MenuItem item) {
         return repo.save(item);
     }
 }

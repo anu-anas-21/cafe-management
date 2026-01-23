@@ -4,8 +4,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "menu")
 public class MenuItem {
 
     @Id
@@ -17,42 +19,12 @@ public class MenuItem {
     private double price;
     private boolean available;
 
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public menuItem() {}
 
-
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
+    public menuItem(String name, String category, double price, boolean available) {
         this.name = name;
-    }
-
-
-    public String getCategory() {
-        return category;
-    }
-    public void setCategory(String category) {
         this.category = category;
-    }
-
-
-    public double getPrice() {
-        return price;
-    }
-    public void setPrice(double price) {
         this.price = price;
-    }
-
-
-    public boolean isAvailable() {
-        return available;
-    }
-    public void setAvailable(boolean available) {
         this.available = available;
     }
 }
