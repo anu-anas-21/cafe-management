@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const API_URL = "https://localhost:8080/api/menu";
+const API = "http://localhost:8080/api/menu";
 
-export const getMenu = () => axios.get(API_URL);
-export const addMenu = (item) => axios.post(API_URL, item);
+export const getMenu = () => axios.get(API);
+export const addMenu = (item) => axios.post(API, item);
+export const updateMenu = (id, item) => axios.put(`${API}/${id}`, item);
+export const deleteMenu = (id) => axios.delete(`${API}/${id}`);

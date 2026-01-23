@@ -1,15 +1,26 @@
-function MenuList() {
-    return (
-        <div className="grid">
-            {menubar.map(item => (
-                <div key={item.id} className="card">
-                    <h3>{item.name}</h3>
-                    <p>{item.category}</p>
-                    <span>{item.price}</span>
-                </div>
-            ))}
+import { deleteMenu } from "../services/api";
+
+function MenuList({ menu, refresh }) {
+  return (
+    <div className="grid">
+      {menu.map(item => (
+        <div className="card" key={item.id}>
+          <h3>{item.name}</h3>
+          <p>{item.category}</p>
+          <strong>₹{item.price}</strong>
+
+          <button
+            className="delete"
+            onClick={() => {
+              deleteMenu(item.id);
+              refresh();
+            }}>
+            ❌ Delete
+          </button>
         </div>
-    );
+      ))}
+    </div>
+  );
 }
 
 export default MenuList;
