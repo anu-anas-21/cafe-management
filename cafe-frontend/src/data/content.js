@@ -10,12 +10,12 @@ export const content = {
     ]
   },
   hero: {
-    headline: "Sip Artisan Coffee with a View of the Burj Khalifa.",
-    subHeadline: "Experience the pulse of Dubai in a sanctuary of taste and style. Downtown Cafe offers a seamless blend of world-class coffee culture and boutique luxury accommodation."
+    headline: "Downtown Cafe at Sheraton Khalidiya",
+    subHeadline: "A contemporary retreat on the Ground Floor. Experience a fusion of international and local cuisines in a sophisticated, modern setting."
   },
   hotelInfo: {
-    title: "About Us",
-    description: "Nestled in the vibrant heart of Downtown Dubai, we are more than just a cafe. We are a retreat for the modern traveler and the urban creative. Our boutique suites offer a minimalist, luxury escape, designed for those who seek the extraordinary in the everyday. Live the lifestyle."
+    title: "About Downtown Cafe",
+    description: "Located in the heart of Abu Dhabi at the Sheraton Khalidiya Hotel, Downtown Cafe is your perfect spot for a romantic evening or a casual business meeting. Open daily from 8 AM to 2 AM, we serve everything from signature sushi and grilled meats to artisan pastries and specialty coffees. Enjoy our wireless internet and warm, welcoming service."
   },
   menuExperience: {
     signatureBlends: "Masterfully roasted beans sourced from the world's finest estates, brewed to perfection.",
@@ -27,9 +27,9 @@ export const content = {
     viewFullMenu: "Explore Our Culinary Collection" // Creative micro-copy for 'View Full Menu'
   },
   footer: {
-    address: "Downtown Cafe, Boulevard Plaza, Downtown Dubai, UAE",
-    hours: "Open Daily: 7:00 AM - 11:00 PM",
-    socialCta: "Follow our journey on Instagram @DowntownCafeDubai"
+    address: "Downtown Cafe, Boulevard Plaza, Downtown Dubai, UAE. Contact: 02 692 8500",
+    hours: "Open Daily: 7:00 AM - 1:00 AM",
+    socialCta: "Instagram: @downtown.sheraton"
   },
   menuItems: {
     breakfast: [

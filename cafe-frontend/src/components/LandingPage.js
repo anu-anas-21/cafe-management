@@ -3,7 +3,7 @@ import { content as fallbackContent } from '../data/content';
 import './LandingPage.css';
 
 const LandingPage = () => {
-    const [activeTab, setActiveTab] = useState('breakfast');
+    const [activeTab, setActiveTab] = useState('');
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -21,6 +21,11 @@ const LandingPage = () => {
                         ...backendData.menuExperience
                     }
                 });
+                // Set first category as active tab
+                const keys = Object.keys(backendData.menuItems);
+                if (keys.length > 0) {
+                    setActiveTab(keys[0]);
+                }
                 setLoading(false);
             })
             .catch(err => {
@@ -91,9 +96,15 @@ const LandingPage = () => {
             {/* Menu Items Showcase */}
             <section className="section menu-items">
                 <div className="menu-tabs">
-                    <button onClick={() => setActiveTab('breakfast')} className={activeTab === 'breakfast' ? 'active' : ''}>Breakfast</button>
-                    <button onClick={() => setActiveTab('lunch')} className={activeTab === 'lunch' ? 'active' : ''}>Lunch</button>
-                    <button onClick={() => setActiveTab('coffee')} className={activeTab === 'coffee' ? 'active' : ''}>Coffee</button>
+                    {Object.keys(data.menuItems).map(category => (
+                        <button
+                            key={category}
+                            onClick={() => setActiveTab(category)}
+                            className={activeTab === category ? 'active' : ''}
+                        >
+                            {category.replace(/([A-Z])/g, ' $1').trim()} {/* Simple capitalization handled by CSS usually, but here strict text */}
+                        </button>
+                    ))}
                 </div>
                 <div className="menu-list">
                     {data.menuItems && data.menuItems[activeTab] && data.menuItems[activeTab].map((item) => (
@@ -108,7 +119,6 @@ const LandingPage = () => {
                 </div>
                 <div className="menu-actions">
                     <button className="secondary-button">{data.interface.viewFullMenu}</button>
-                    {/* Admin view simulation */}
                     <button className="admin-button">{data.interface.adminAddItem}</button>
                 </div>
             </section>

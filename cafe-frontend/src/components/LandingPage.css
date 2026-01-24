@@ -68,7 +68,8 @@ body {
 .hero {
   height: 90vh;
   /* Taller hero */
-  background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(20, 33, 61, 0.6)), url('https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=2537&auto=format&fit=crop');
+  background: var(--primary-color);
+  /* Removed Image, kept solid color */
   /* Vibrant Coffee Image */
   background-size: cover;
   background-position: center;
@@ -212,8 +213,12 @@ body {
 /* Menu Items Showcase */
 .menu-items {
   background-color: var(--primary-color);
-  max-width: 1200px;
-  margin: 0 auto;
+  width: 100%;
+  max-width: 100%;
+  /* Full Width */
+  padding: 6rem 4rem;
+  /* More padding for breathing room */
+  box-sizing: border-box;
 }
 
 .menu-tabs {
@@ -221,34 +226,30 @@ body {
   display: flex;
   justify-content: center;
   gap: 1rem;
+  flex-wrap: wrap;
+  /* Allow tabs to wrap */
 }
 
 .menu-tabs button {
   background: transparent;
   border: 1px solid var(--glass-border);
-  padding: 1rem 2.5rem;
-  font-size: 1rem;
+  padding: 0.8rem 1.5rem;
+  font-size: 0.9rem;
   cursor: pointer;
   color: var(--text-muted);
   border-radius: 50px;
   transition: all 0.3s;
   font-weight: 500;
-}
-
-.menu-tabs button.active {
-  background-color: var(--accent-color);
-  /* No gradient for active tab for contrast */
-  color: var(--primary-color);
-  /* Dark text on bright button */
-  border-color: var(--accent-color);
-  font-weight: 700;
-  box-shadow: 0 4px 15px rgba(252, 163, 17, 0.4);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
 }
 
 .menu-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  /* Responsive grid */
   gap: 2rem;
+  width: 100%;
 }
 
 .menu-item {
