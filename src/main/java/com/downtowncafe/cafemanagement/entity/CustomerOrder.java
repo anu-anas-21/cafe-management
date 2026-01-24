@@ -1,4 +1,4 @@
-package com.downtowncafe.entity;
+package com.downtowncafe.cafemanagement.entity;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "customer_orders") // Changed table name to avoid keyword
+@Table(name = "customer_orders")
 public class CustomerOrder {
 
     @Id
@@ -32,7 +32,6 @@ public class CustomerOrder {
         this.timestamp = timestamp;
     }
 
-    // Getters and Setters
     public String getId() {
         return id;
     }

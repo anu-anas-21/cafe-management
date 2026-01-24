@@ -1,4 +1,4 @@
-package com.downtowncafe.entity;
+package com.downtowncafe.cafemanagement.entity;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
@@ -28,7 +28,6 @@ public class OrderItem {
         this.price = price;
     }
 
-    // Getters and Setters
     public Long getId() {
         return id;
     }

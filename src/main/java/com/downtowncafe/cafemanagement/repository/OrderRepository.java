@@ -1,8 +1,12 @@
 package com.downtowncafe.cafemanagement.repository;
 
+import com.downtowncafe.cafemanagement.entity.CustomerOrder;
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.downtowncafe.cafemanagement.model.OrderEntity;
+import org.springframework.stereotype.Repository;
 
-public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
+import java.util.List;
 
+@Repository
+public interface OrderRepository extends JpaRepository<CustomerOrder, String> {
+    List<CustomerOrder> findAllByOrderByTimestampDesc();
 }
