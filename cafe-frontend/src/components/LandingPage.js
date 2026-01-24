@@ -1,14 +1,58 @@
 import React, { useState, useEffect } from 'react';
 import { content as fallbackContent } from '../data/content';
 import { addMenu } from '../services/api';
-import AdminModal from './AdminModal'; // Import is crucial
 import './LandingPage.css';
+
+// Admin Order View Component (Internal)
+const AdminOrdersModal = ({ isOpen, onClose }) => {
+    const [orders, setOrders] = useState([]);
+
+    useEffect(() => {
+        if (isOpen) {
+            fetch('http://localhost:8080/api/orders')
+                .then(res => res.json())
+                .then(setOrders)
+                .catch(err => console.error("Error fetching orders:", err));
+        }
+    }, [isOpen]);
+
+    if (!isOpen) return null;
+
+    return (
+        <div className="modal-overlay">
+            <div className="modal-content admin-orders-content">
+                <h2>Active Orders</h2>
+                <div className="orders-list">
+                    {(!orders || orders.length === 0) ? <p>No active orders.</p> : orders.map((order, idx) => (
+                        <div key={idx} className="order-card">
+                            <div className="order-header">
+                                <span>Table: {order.tableNumber || "N/A"}</span>
+                                <span>{order.timestamp ? new Date(order.timestamp).toLocaleTimeString() : ""}</span>
+                                <span className={`status ${order.status}`}>{order.status}</span>
+                            </div>
+                            <ul className="order-items-list">
+                                {(order.items || []).map((item, i) => (
+                                    <li key={i}>{item.name} - {item.price} AED</li>
+                                ))}
+                            </ul>
+                            <div className="order-total">Total: {order.total} AED</div>
+                        </div>
+                    ))}
+                </div>
+                <div className="modal-actions">
+                    <button onClick={onClose} className="cancel-btn">Close</button>
+                </div>
+            </div>
+        </div>
+    );
+};
 
 const LandingPage = () => {
     const [activeTab, setActiveTab] = useState('');
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
+    const [cart, setCart] = useState([]);
+    const [isAdminOrdersOpen, setIsAdminOrdersOpen] = useState(false);
 
     const fetchData = () => {
         fetch('http://localhost:8080/api/menu')
@@ -17,15 +61,10 @@ const LandingPage = () => {
                 setData({
                     ...fallbackContent,
                     menuItems: backendData.menuItems,
-                    menuExperience: {
-                        ...fallbackContent.menuExperience,
-                        ...backendData.menuExperience
-                    }
+                    menuExperience: { ...fallbackContent.menuExperience, ...backendData.menuExperience }
                 });
                 const keys = Object.keys(backendData.menuItems);
-                if (keys.length > 0 && !activeTab) {
-                    setActiveTab(keys[0]);
-                }
+                if (keys.length > 0 && !activeTab) setActiveTab(keys[0]);
                 setLoading(false);
             })
             .catch(err => {
@@ -35,18 +74,32 @@ const LandingPage = () => {
             });
     };
 
-    useEffect(() => {
-        fetchData();
-    }, []);
+    useEffect(() => { fetchData(); }, []);
 
-    const handleAddItem = async (newItem) => {
+    const addToCart = (item) => {
+        setCart([...cart, item]);
+    };
+
+    const placeOrder = async () => {
+        if (cart.length === 0) return alert("Your cart is empty!");
+        const tableNumber = prompt("Enter your Table Number:");
+        if (!tableNumber) return;
+
         try {
-            await addMenu(newItem);
-            alert("Item added successfully!");
-            fetchData(); // Refresh menu
+            const response = await fetch('http://localhost:8080/api/orders', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ tableNumber, items: cart })
+            });
+            if (response.ok) {
+                alert("Order placed successfully!");
+                setCart([]);
+            } else {
+                alert("Failed to place order.");
+            }
         } catch (error) {
-            console.error("Error adding item:", error);
-            alert("Failed to add item. Check console.");
+            console.error("Error placing order:", error);
+            alert("Error placing order.");
         }
     };
 
@@ -63,6 +116,7 @@ const LandingPage = () => {
                             {item.label}
                         </a>
                     ))}
+                    {/* Admin Access hidden in nav or triggered via secret/button */}
                 </nav>
             </header>
 
@@ -129,6 +183,7 @@ const LandingPage = () => {
                                                     <span className="item-price">{item.price} AED</span>
                                                 </div>
                                                 {item.description && <p className="item-desc">{item.description}</p>}
+                                                <button className="add-to-order-btn" onClick={() => addToCart(item)}>+ Add to Order</button>
                                             </div>
                                         ))}
                                     </div>
@@ -142,19 +197,22 @@ const LandingPage = () => {
                     <button className="secondary-button" onClick={() => window.open("https://drive.google.com/file/d/1K2k1iDkkdEFgN0rQO80NhopdLpPmetx6/view", "_blank")}>
                         {data.interface.viewFullMenu}
                     </button>
-                    {/* Admin Button Triggers Modal */}
-                    <button className="admin-button" onClick={() => setIsModalOpen(true)}>
-                        {data.interface.adminAddItem || "Admin Add Item"}
+                    <button className="admin-button" onClick={() => setIsAdminOrdersOpen(true)}>
+                        Admin Orders
                     </button>
                 </div>
             </section>
 
-            {/* Admin Modal Component */}
-            <AdminModal
-                isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-                onAdd={handleAddItem}
-            />
+            {/* Floating Cart */}
+            {cart.length > 0 && (
+                <div className="floating-cart">
+                    <h3>Current Order ({cart.length})</h3>
+                    <p>Total: {cart.reduce((sum, item) => sum + item.price, 0)} AED</p>
+                    <button onClick={placeOrder} className="place-order-btn">Place Order</button>
+                </div>
+            )}
+
+            <AdminOrdersModal isOpen={isAdminOrdersOpen} onClose={() => setIsAdminOrdersOpen(false)} />
 
             <footer id="footer" className="footer">
                 <p>{data.footer.address}</p>
