@@ -32,7 +32,7 @@ public class MenuController {
 
         @PostMapping("/menu")
         public MenuItemDTO addMenuItem(@RequestBody MenuItemRequest request) {
-                String category = request.category().toLowerCase();
+                String category = request.category(); // Keep original case to match map keys
                 MenuItemDTO newItem = new MenuItemDTO(
                                 UUID.randomUUID().toString(),
                                 request.name(),

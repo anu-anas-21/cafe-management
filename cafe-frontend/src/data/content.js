@@ -6,7 +6,6 @@ export const content = {
       { label: "Suites", href: "#hotel-info" },
       { label: "Menu", href: "https://drive.google.com/file/d/1K2k1iDkkdEFgN0rQO80NhopdLpPmetx6/view", external: true },
       { label: "Photos", href: "#photos" },
-      { label: "Book a Stay", href: "#book" },
       { label: "Contact", href: "#footer" }
     ]
   },

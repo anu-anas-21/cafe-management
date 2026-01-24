@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { content as fallbackContent } from '../data/content';
+import { addMenu } from '../services/api';
+import AdminModal from './AdminModal'; // Import is crucial
 import './LandingPage.css';
 
 const LandingPage = () => {
     const [activeTab, setActiveTab] = useState('');
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
 
-    useEffect(() => {
-        // Fetch data from Spring Boot backend
+    const fetchData = () => {
         fetch('http://localhost:8080/api/menu')
             .then(res => res.json())
             .then(backendData => {
-                // Merge backend menu items with frontend static text
                 setData({
                     ...fallbackContent,
                     menuItems: backendData.menuItems,
@@ -21,63 +22,62 @@ const LandingPage = () => {
                         ...backendData.menuExperience
                     }
                 });
-                // Set first category as active tab
                 const keys = Object.keys(backendData.menuItems);
-                if (keys.length > 0) {
+                if (keys.length > 0 && !activeTab) {
                     setActiveTab(keys[0]);
                 }
                 setLoading(false);
             })
             .catch(err => {
-                console.error("Failed to fetch menu from backend, specific error:", err);
-                // Fallback to static content if backend fails
+                console.error("Failed to fetch menu:", err);
                 setData(fallbackContent);
                 setLoading(false);
             });
+    };
+
+    useEffect(() => {
+        fetchData();
     }, []);
 
-    if (loading) {
-        return <div className="loading">Loading Experience...</div>;
-    }
+    const handleAddItem = async (newItem) => {
+        try {
+            await addMenu(newItem);
+            alert("Item added successfully!");
+            fetchData(); // Refresh menu
+        } catch (error) {
+            console.error("Error adding item:", error);
+            alert("Failed to add item. Check console.");
+        }
+    };
 
-    // Ensure data is not null before rendering
+    if (loading) return <div className="loading">Loading Experience...</div>;
     if (!data) return null;
 
     return (
         <div className="landing-page">
-            {/* Header */}
             <header className="header">
                 <div className="logo">Downtown Cafe</div>
                 <nav>
                     {data.header.navigation.map((item, index) => (
-                        <a
-                            key={index}
-                            href={item.href}
-                            target={item.external ? "_blank" : "_self"}
-                            rel={item.external ? "noopener noreferrer" : ""}
-                        >
+                        <a key={index} href={item.href} target={item.external ? "_blank" : "_self"} rel={item.external ? "noopener noreferrer" : ""}>
                             {item.label}
                         </a>
                     ))}
                 </nav>
             </header>
 
-            {/* Hero Section */}
             <section id="hero" className="hero">
                 <div className="hero-content">
                     <h1>{data.hero.headline}</h1>
                     <p>{data.hero.subHeadline}</p>
-                    <button className="cta-button">Book a Table</button>
                 </div>
             </section>
 
-            {/* Hotel Info */}
             <section id="hotel-info" className="section hotel-info">
                 <h2>{data.hotelInfo.title}</h2>
                 <p>{data.hotelInfo.description}</p>
             </section>
 
-            {/* Photos Section */}
             <section id="photos" className="section photos-section">
                 <h2>Our Ambience</h2>
                 <div className="photo-grid">
@@ -88,38 +88,23 @@ const LandingPage = () => {
                 </div>
             </section>
 
-            {/* Menu Experience */}
             <section id="menu" className="section menu-experience">
                 <h2>Menu Experience</h2>
                 <div className="menu-intros">
                     {data.menuExperience && (
                         <>
-                            <div className="intro-card">
-                                <h3>Signature Blends</h3>
-                                <p>{data.menuExperience.signatureBlends}</p>
-                            </div>
-                            <div className="intro-card">
-                                <h3>Chef’s Specials</h3>
-                                <p>{data.menuExperience.chefsSpecials}</p>
-                            </div>
-                            <div className="intro-card">
-                                <h3>Artisan Pastries</h3>
-                                <p>{data.menuExperience.artisanPastries}</p>
-                            </div>
+                            <div className="intro-card"><h3>Signature Blends</h3><p>{data.menuExperience.signatureBlends}</p></div>
+                            <div className="intro-card"><h3>Chef’s Specials</h3><p>{data.menuExperience.chefsSpecials}</p></div>
+                            <div className="intro-card"><h3>Artisan Pastries</h3><p>{data.menuExperience.artisanPastries}</p></div>
                         </>
                     )}
                 </div>
             </section>
 
-            {/* Menu Items Showcase */}
             <section className="section menu-items">
                 <div className="menu-tabs">
                     {Object.keys(data.menuItems).map(category => (
-                        <button
-                            key={category}
-                            onClick={() => setActiveTab(category)}
-                            className={activeTab === category ? 'active' : ''}
-                        >
+                        <button key={category} onClick={() => setActiveTab(category)} className={activeTab === category ? 'active' : ''}>
                             {category}
                         </button>
                     ))}
@@ -129,7 +114,6 @@ const LandingPage = () => {
                     {data.menuItems && data.menuItems[activeTab] && (
                         <div className="menu-grouped-grid">
                             {Object.entries(data.menuItems[activeTab].reduce((acc, item) => {
-                                // Group by subCategory, default to "General" or the item name if no subcat
                                 const cat = item.subCategory || "General";
                                 if (!acc[cat]) acc[cat] = [];
                                 acc[cat].push(item);
@@ -155,17 +139,23 @@ const LandingPage = () => {
                 </div>
 
                 <div className="menu-actions">
-                    <button
-                        className="secondary-button"
-                        onClick={() => window.open("https://drive.google.com/file/d/1K2k1iDkkdEFgN0rQO80NhopdLpPmetx6/view", "_blank")}
-                    >
+                    <button className="secondary-button" onClick={() => window.open("https://drive.google.com/file/d/1K2k1iDkkdEFgN0rQO80NhopdLpPmetx6/view", "_blank")}>
                         {data.interface.viewFullMenu}
                     </button>
-                    <button className="admin-button">{data.interface.adminAddItem}</button>
+                    {/* Admin Button Triggers Modal */}
+                    <button className="admin-button" onClick={() => setIsModalOpen(true)}>
+                        {data.interface.adminAddItem || "Admin Add Item"}
+                    </button>
                 </div>
             </section>
 
-            {/* Footer */}
+            {/* Admin Modal Component */}
+            <AdminModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                onAdd={handleAddItem}
+            />
+
             <footer id="footer" className="footer">
                 <p>{data.footer.address}</p>
                 <p>{data.footer.hours}</p>
