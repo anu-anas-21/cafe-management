@@ -4,7 +4,8 @@ export const content = {
     navigation: [
       { label: "Home", href: "#hero" },
       { label: "Suites", href: "#hotel-info" },
-      { label: "Menu", href: "#menu" },
+      { label: "Menu", href: "https://drive.google.com/file/d/1K2k1iDkkdEFgN0rQO80NhopdLpPmetx6/view", external: true },
+      { label: "Photos", href: "#photos" },
       { label: "Book a Stay", href: "#book" },
       { label: "Contact", href: "#footer" }
     ]
@@ -27,7 +28,7 @@ export const content = {
     viewFullMenu: "Explore Our Culinary Collection" // Creative micro-copy for 'View Full Menu'
   },
   footer: {
-    address: "Downtown Cafe, Boulevard Plaza, Downtown Dubai, UAE. Contact: 02 692 8500",
+    address: "Sheraton Khalidiya Hotel Ground floor - Al Hisn - W7 01 - Abu Dhabi. Contact: 02 692 8500",
     hours: "Open Daily: 7:00 AM - 1:00 AM",
     socialCta: "Instagram: @downtown.sheraton"
   },

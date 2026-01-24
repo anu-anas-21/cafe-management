@@ -50,7 +50,14 @@ const LandingPage = () => {
                 <div className="logo">Downtown Cafe</div>
                 <nav>
                     {data.header.navigation.map((item, index) => (
-                        <a key={index} href={item.href}>{item.label}</a>
+                        <a
+                            key={index}
+                            href={item.href}
+                            target={item.external ? "_blank" : "_self"}
+                            rel={item.external ? "noopener noreferrer" : ""}
+                        >
+                            {item.label}
+                        </a>
                     ))}
                 </nav>
             </header>
@@ -68,6 +75,17 @@ const LandingPage = () => {
             <section id="hotel-info" className="section hotel-info">
                 <h2>{data.hotelInfo.title}</h2>
                 <p>{data.hotelInfo.description}</p>
+            </section>
+
+            {/* Photos Section */}
+            <section id="photos" className="section photos-section">
+                <h2>Our Ambience</h2>
+                <div className="photo-grid">
+                    <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=1000&auto=format&fit=crop" alt="Cafe Interior" />
+                    <img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?q=80&w=1000&auto=format&fit=crop" alt="Coffee Art" />
+                    <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1000&auto=format&fit=crop" alt="Beans" />
+                    <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?q=80&w=1000&auto=format&fit=crop" alt="Social" />
+                </div>
             </section>
 
             {/* Menu Experience */}
@@ -118,7 +136,12 @@ const LandingPage = () => {
                     ))}
                 </div>
                 <div className="menu-actions">
-                    <button className="secondary-button">{data.interface.viewFullMenu}</button>
+                    <button
+                        className="secondary-button"
+                        onClick={() => window.open("https://drive.google.com/file/d/1K2k1iDkkdEFgN0rQO80NhopdLpPmetx6/view", "_blank")}
+                    >
+                        {data.interface.viewFullMenu}
+                    </button>
                     <button className="admin-button">{data.interface.adminAddItem}</button>
                 </div>
             </section>

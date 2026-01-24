@@ -22,7 +22,7 @@ function App() {
   }, []);
 
   return (
-    <div className="container">
+    <div className="full-width-app">
       {/* 
         Temporarily rendering LandingPage to showcase generated content.
         Original components are commented out below.
