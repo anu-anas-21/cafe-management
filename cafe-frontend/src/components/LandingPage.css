@@ -19,12 +19,7 @@
 body {
   margin: 0;
   background-color: var(--primary-color);
-  background-image: url('/assets/site_bg.png');
-  /* Generated seamless texture */
-  background-repeat: repeat;
-  background-size: 400px;
-  /* Adjust pattern scale */
-  background-attachment: fixed;
+  /* background-image: url('../assets/site_bg.png'); Removed as requested */
   color: var(--text-light);
   font-family: var(--font-body);
 }
@@ -74,7 +69,7 @@ body {
 .hero {
   height: 95vh;
   /* Use the User's uploaded reference image as the main hero visual */
-  background: linear-gradient(to bottom, rgba(26, 26, 26, 0.3), rgba(26, 26, 26, 0.95)), url('/assets/reference_poster.png');
+  background: linear-gradient(to bottom, rgba(26, 26, 26, 0.3), rgba(26, 26, 26, 0.95)), url('../assets/reference_poster.png');
   background-size: cover;
   /* Cover or contain depending on image ratio */
   background-position: center top;
