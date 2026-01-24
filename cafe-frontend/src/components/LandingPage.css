@@ -1,17 +1,17 @@
-/* LandingPage.css */
-
 /* General Styles */
 :root {
-  --primary-color: #0f172a;
-  /* Deep Midnight Blue */
-  --accent-color: #fca311;
-  /* Vibrant Orange/Gold */
-  --secondary-color: #14213d;
-  /* Lighter Midnight */
+  --primary-color: #1a1a1a;
+  /* Dark Charcoal based on image */
+  --accent-color: #c5a065;
+  /* Gold from image */
+  --secondary-color: #2b2b2b;
+  /* Slightly lighter dark */
   --text-light: #e5e5e5;
-  --text-muted: #94a3b8;
-  --glass-bg: rgba(255, 255, 255, 0.05);
-  --glass-border: rgba(255, 255, 255, 0.1);
+  --text-muted: #a0a0a0;
+  --glass-bg: rgba(26, 26, 26, 0.85);
+  /* Darker glass */
+  --glass-border: rgba(197, 160, 101, 0.3);
+  /* Gold border */
   --font-heading: 'Outfit', sans-serif;
   --font-body: 'Inter', sans-serif;
 }
@@ -19,6 +19,12 @@
 body {
   margin: 0;
   background-color: var(--primary-color);
+  background-image: url('/assets/site_bg.png');
+  /* Generated seamless texture */
+  background-repeat: repeat;
+  background-size: 400px;
+  /* Adjust pattern scale */
+  background-attachment: fixed;
   color: var(--text-light);
   font-family: var(--font-body);
 }
@@ -66,18 +72,18 @@ body {
 
 /* Hero Section */
 .hero {
-  height: 90vh;
-  /* Taller hero */
-  background: var(--primary-color);
-  /* Removed Image, kept solid color */
-  /* Vibrant Coffee Image */
+  height: 95vh;
+  /* Use the User's uploaded reference image as the main hero visual */
+  background: linear-gradient(to bottom, rgba(26, 26, 26, 0.3), rgba(26, 26, 26, 0.95)), url('/assets/reference_poster.png');
   background-size: cover;
-  background-position: center;
+  /* Cover or contain depending on image ratio */
+  background-position: center top;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   position: relative;
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
 }
 
 .hero::after {
@@ -384,4 +390,65 @@ body {
   font-weight: bold;
   cursor: pointer;
   font-size: 1.1rem;
+}
+
+/* Sub-category Layout */
+.menu-grouped-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 3rem;
+  width: 100%;
+  max-width: 1400px;
+  /* Optional cap for very large screens */
+  margin: 0 auto;
+}
+
+.menu-subcategory-group {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  padding: 2rem;
+  border-radius: 16px;
+}
+
+.subcategory-title {
+  color: var(--accent-color);
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--glass-border);
+  padding-bottom: 0.5rem;
+}
+
+.menu-item-compact {
+  margin-bottom: 1.2rem;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+  padding-bottom: 0.8rem;
+}
+
+.menu-item-compact:last-child {
+  border-bottom: none;
+}
+
+.item-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.3rem;
+}
+
+.item-name {
+  font-weight: 500;
+  color: var(--text-light);
+  font-size: 1.1rem;
+}
+
+.item-price {
+  color: var(--accent-color);
+  font-weight: 700;
+}
+
+.item-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin: 0;
 }

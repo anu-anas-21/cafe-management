@@ -120,21 +120,40 @@ const LandingPage = () => {
                             onClick={() => setActiveTab(category)}
                             className={activeTab === category ? 'active' : ''}
                         >
-                            {category.replace(/([A-Z])/g, ' $1').trim()} {/* Simple capitalization handled by CSS usually, but here strict text */}
+                            {category}
                         </button>
                     ))}
                 </div>
-                <div className="menu-list">
-                    {data.menuItems && data.menuItems[activeTab] && data.menuItems[activeTab].map((item) => (
-                        <div key={item.id} className="menu-item">
-                            <div className="item-header">
-                                <h4>{item.name}</h4>
-                                <span className="price">{item.price} AED</span>
-                            </div>
-                            <p>{item.description}</p>
+
+                <div className="menu-list-container">
+                    {data.menuItems && data.menuItems[activeTab] && (
+                        <div className="menu-grouped-grid">
+                            {Object.entries(data.menuItems[activeTab].reduce((acc, item) => {
+                                // Group by subCategory, default to "General" or the item name if no subcat
+                                const cat = item.subCategory || "General";
+                                if (!acc[cat]) acc[cat] = [];
+                                acc[cat].push(item);
+                                return acc;
+                            }, {})).map(([subCat, items]) => (
+                                <div key={subCat} className="menu-subcategory-group">
+                                    <h3 className="subcategory-title">{subCat}</h3>
+                                    <div className="subcategory-items">
+                                        {items.map((item) => (
+                                            <div key={item.id} className="menu-item-compact">
+                                                <div className="item-row">
+                                                    <span className="item-name">{item.name}</span>
+                                                    <span className="item-price">{item.price} AED</span>
+                                                </div>
+                                                {item.description && <p className="item-desc">{item.description}</p>}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
                         </div>
-                    ))}
+                    )}
                 </div>
+
                 <div className="menu-actions">
                     <button
                         className="secondary-button"
