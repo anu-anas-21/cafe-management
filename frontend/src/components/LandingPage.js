@@ -75,7 +75,8 @@ const AdminOrdersModal = ({ isOpen, onClose }) => {
 };
 
 const LandingPage = () => {
-    const [activeTab, setActiveTab] = useState('');
+    const [activeTab, setActiveTab] = useState(null);
+    const [showMenu, setShowMenu] = useState(false);
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [cart, setCart] = useState([]);
@@ -198,32 +199,53 @@ const LandingPage = () => {
             <section className="section menu-items">
                 <div className="menu-tabs">
                     {Object.keys(data.menuItems).map(category => (
-                        <button key={category} onClick={() => setActiveTab(category)} className={activeTab === category ? 'active' : ''}>
+                        <button
+                            key={category}
+                            onClick={() => {
+                                setActiveTab(category);
+                                setShowMenu(true);
+                            }}
+                            className={activeTab === category ? 'active' : ''}
+                        >
                             {category}
                         </button>
                     ))}
                 </div>
 
                 <div className="menu-list-container">
-                    {data.menuItems && data.menuItems[activeTab] && (
+                    {(!activeTab || !showMenu) && (
+                        <div className="menu-placeholder">
+                            <p>Please select a category to view menu items</p>
+                        </div>
+                    )}
+                    {showMenu && activeTab && data.menuItems && data.menuItems[activeTab] && (
                         <div className="menu-grouped-grid">
-                            {Object.entries(data.menuItems[activeTab].reduce((acc, item) => {
-                                const cat = item.subCategory || "General";
-                                if (!acc[cat]) acc[cat] = [];
-                                acc[cat].push(item);
-                                return acc;
-                            }, {})).map(([subCat, items]) => (
+                            {Object.entries(
+                                data.menuItems[activeTab].reduce((acc, item) => {
+                                    const cat = item.subCategory || "General";
+                                    if (!acc[cat]) acc[cat] = [];
+                                    acc[cat].push(item);
+                                    return acc;
+                                }, {})
+                            ).map(([subCat, items]) => (
                                 <div key={subCat} className="menu-subcategory-group">
                                     <h3 className="subcategory-title">{subCat}</h3>
                                     <div className="subcategory-items">
-                                        {items.map((item) => (
+                                        {items.map(item => (
                                             <div key={item.id} className="menu-item-compact">
                                                 <div className="item-row">
                                                     <span className="item-name">{item.name}</span>
                                                     <span className="item-price">{item.price} AED</span>
                                                 </div>
-                                                {item.description && <p className="item-desc">{item.description}</p>}
-                                                <button className="add-to-order-btn" onClick={() => addToCart(item)}>+ Add to Order</button>
+                                                {item.description && (
+                                                    <p className="item-desc">{item.description}</p>
+                                                )}
+                                                <button
+                                                    className="add-to-order-btn"
+                                                    onClick={() => addToCart(item)}
+                                                >
+                                                    + Add to Order
+                                                </button>
                                             </div>
                                         ))}
                                     </div>
@@ -232,8 +254,8 @@ const LandingPage = () => {
                         </div>
                     )}
                 </div>
-
             </section>
+
 
             {/* Floating Cart */}
             {cart.length > 0 && (

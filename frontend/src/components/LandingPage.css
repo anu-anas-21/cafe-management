@@ -636,3 +636,16 @@ body {
     bottom: 1rem;
   }
 }
+
+.menu-list-container {
+  min-height: 250px;
+}
+
+.menu-placeholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  text-align: center;
+  color: #ffffff;
+}
