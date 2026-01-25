@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { content as fallbackContent } from '../data/content';
 import { addMenu } from '../services/api';
+import AdminLoginModal from './AdminLoginModal'; // Import Login Modal
 import './LandingPage.css';
 
 // Admin Order View Component (Internal)
@@ -53,6 +54,8 @@ const LandingPage = () => {
     const [loading, setLoading] = useState(true);
     const [cart, setCart] = useState([]);
     const [isAdminOrdersOpen, setIsAdminOrdersOpen] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isAdminLoginOpen, setIsAdminLoginOpen] = useState(false);
 
     const fetchData = () => {
         fetch('http://localhost:8080/api/menu')
@@ -100,6 +103,14 @@ const LandingPage = () => {
         } catch (error) {
             console.error("Error placing order:", error);
             alert("Error placing order.");
+        }
+    };
+
+    const handleAdminAccess = () => {
+        if (isAuthenticated) {
+            setIsAdminOrdersOpen(true);
+        } else {
+            setIsAdminLoginOpen(true);
         }
     };
 
@@ -197,7 +208,7 @@ const LandingPage = () => {
                     <button className="secondary-button" onClick={() => window.open("https://drive.google.com/file/d/1K2k1iDkkdEFgN0rQO80NhopdLpPmetx6/view", "_blank")}>
                         {data.interface.viewFullMenu}
                     </button>
-                    <button className="admin-button" onClick={() => setIsAdminOrdersOpen(true)}>
+                    <button className="admin-button" onClick={handleAdminAccess}>
                         Admin Orders
                     </button>
                 </div>
@@ -213,6 +224,16 @@ const LandingPage = () => {
             )}
 
             <AdminOrdersModal isOpen={isAdminOrdersOpen} onClose={() => setIsAdminOrdersOpen(false)} />
+
+            <AdminLoginModal
+                isOpen={isAdminLoginOpen}
+                onClose={() => setIsAdminLoginOpen(false)}
+                onLogin={() => {
+                    setIsAuthenticated(true);
+                    setIsAdminLoginOpen(false);
+                    setIsAdminOrdersOpen(true);
+                }}
+            />
 
             <footer id="footer" className="footer">
                 <p>{data.footer.address}</p>
