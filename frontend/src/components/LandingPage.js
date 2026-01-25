@@ -175,15 +175,15 @@ const LandingPage = () => {
             <section id="photos" className="section photos-section">
                 <h2>Our Ambience</h2>
                 <div className="photo-grid">
-                    <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=1000&auto=format&fit=crop" alt="Cafe Interior" />
-                    <img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?q=80&w=1000&auto=format&fit=crop" alt="Coffee Art" />
-                    <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1000&auto=format&fit=crop" alt="Beans" />
-                    <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?q=80&w=1000&auto=format&fit=crop" alt="Social" />
+                    <img src="https://i.ibb.co/9kK7F397/Screenshot-2026-01-26-002039.png" alt="Cafe Interior" />
+                    <img src="https://i.ibb.co/whTj4m1T/Screenshot-2026-01-26-002201.png " alt="Coffee Art" />
+                    <img src="https://i.ibb.co/0jBh7hM9/Screenshot-2026-01-26-002113.png" alt="Beans" />
+                    <img src="https://i.ibb.co/b4w271p/Screenshot-2026-01-26-003340.png" alt="Social" />
                 </div>
             </section>
 
             <section id="menu" className="section menu-experience">
-                <h2>Menu Experience</h2>
+                <h2>COLLECTIONS</h2>
                 <div className="menu-intros">
                     {data.menuExperience && (
                         <>

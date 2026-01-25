@@ -48,6 +48,13 @@ public class MenuController {
     }
 
     private void initializeMenu() {
+        // Shisha & Special Flavors
+        menuItems.put("Shisha", new CopyOnWriteArrayList<>(List.of(
+                new MenuItemDTO("sh1", "Classic Shisha", "", new BigDecimal("50"), "Shisha"),
+                new MenuItemDTO("sh2", "Double Flavors", "", new BigDecimal("55"), "Shisha"),
+                new MenuItemDTO("sh3", "Triple Flavors", "", new BigDecimal("60"), "Shisha"),
+                new MenuItemDTO("sh4", "Head Change", "", new BigDecimal("55"), "Shisha")
+        )));
         // Coffee & Tea
         menuItems.put("Coffee & Tea", new CopyOnWriteArrayList<>(List.of(
                 new MenuItemDTO("bc1", "Americano", "", new BigDecimal("22"), "Black Coffee"),
@@ -251,13 +258,6 @@ public class MenuController {
                 new MenuItemDTO("cks3", "1kg Chocolate with nuts", "", new BigDecimal("80"), "Cookies"),
                 new MenuItemDTO("cks4", "1kg Cocounuts", "", new BigDecimal("80"), "Cookies"),
                 new MenuItemDTO("cks5", "1kg Pistacio", "", new BigDecimal("80"), "Cookies")
-        )));
-        // Shisha & Special Flavors
-        menuItems.put("Shisha", new CopyOnWriteArrayList<>(List.of(
-                new MenuItemDTO("sh1", "Classic Shisha", "", new BigDecimal("50"), "Shisha"),
-                new MenuItemDTO("sh2", "Double Flavors", "", new BigDecimal("55"), "Shisha"),
-                new MenuItemDTO("sh3", "Triple Flavors", "", new BigDecimal("60"), "Shisha"),
-                new MenuItemDTO("sh4", "Head Change", "", new BigDecimal("55"), "Shisha")
         )));
     }
 }
