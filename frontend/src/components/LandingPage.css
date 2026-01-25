@@ -66,6 +66,26 @@ body {
   color: var(--accent-color);
 }
 
+.admin-nav-button {
+  margin-left: 2rem;
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  color: var(--text-muted);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.admin-nav-button:hover {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+  background: rgba(197, 160, 101, 0.1);
+}
+
 /* Hero Section */
 .hero {
   height: 95vh;
@@ -106,6 +126,7 @@ body {
   font-weight: 800;
   background: linear-gradient(to right, #fff, var(--accent-color));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
@@ -329,42 +350,6 @@ body {
   transform: scale(1.03);
 }
 
-.menu-actions {
-  margin-top: 4rem;
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-}
-
-.secondary-button,
-.admin-button {
-  padding: 1rem 2rem;
-  border: 1px solid var(--accent-color);
-  background: transparent;
-  color: var(--accent-color);
-  cursor: pointer;
-  text-transform: uppercase;
-  font-size: 0.9rem;
-  border-radius: 8px;
-  transition: all 0.3s;
-  font-weight: 600;
-}
-
-.secondary-button:hover {
-  background: var(--accent-color);
-  color: var(--primary-color);
-  box-shadow: 0 0 15px rgba(252, 163, 17, 0.4);
-}
-
-.admin-button {
-  border-color: var(--glass-border);
-  color: var(--text-muted);
-}
-
-.admin-button:hover {
-  border-color: var(--text-light);
-  color: var(--text-light);
-}
 
 /* Footer */
 .footer {
@@ -388,37 +373,49 @@ body {
   font-size: 1.1rem;
 }
 
-/* Sub-category Layout */
 .menu-grouped-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 3rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
+  gap: 2rem;
   width: 100%;
   max-width: 1400px;
-  /* Optional cap for very large screens */
   margin: 0 auto;
+  padding: 0 1rem;
+  box-sizing: border-box;
 }
 
 .menu-subcategory-group {
-  background: var(--glass-bg);
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--glass-border);
   padding: 2rem;
-  border-radius: 16px;
+  border-radius: 20px;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.menu-subcategory-group:hover {
+  border-color: rgba(197, 160, 101, 0.5);
+  transform: translateY(-5px);
 }
 
 .subcategory-title {
   color: var(--accent-color);
   font-family: var(--font-heading);
-  font-size: 1.8rem;
-  margin-bottom: 1.5rem;
-  border-bottom: 1px solid var(--glass-border);
-  padding-bottom: 0.5rem;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid var(--glass-border);
+  padding-bottom: 0.75rem;
+  text-align: left;
+}
+
+.subcategory-items {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
 }
 
 .menu-item-compact {
-  margin-bottom: 1.2rem;
-  border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
-  padding-bottom: 0.8rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .menu-item-compact:last-child {
@@ -428,25 +425,31 @@ body {
 .item-row {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 0.3rem;
+  align-items: baseline;
+  margin-bottom: 0.5rem;
 }
 
 .item-name {
-  font-weight: 500;
-  color: var(--text-light);
-  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  font-size: 1.2rem;
+  letter-spacing: 0.5px;
 }
 
 .item-price {
   color: var(--accent-color);
   font-weight: 700;
+  font-size: 1.1rem;
+  background: rgba(197, 160, 101, 0.1);
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
 }
 
 .item-desc {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: var(--text-muted);
-  font-style: italic;
-  margin: 0;
+  line-height: 1.6;
+  margin-bottom: 1rem;
 }
 
 /* Additions for Order System */
@@ -547,6 +550,89 @@ body {
 }
 
 .status.PENDING {
-  background: orange;
-  color: black;
+  background: #f39c12;
+  color: #000;
+}
+
+.status.SERVED {
+  background: #2ecc71;
+  color: #fff;
+}
+
+.serve-btn {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background: #2ecc71;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.serve-btn:hover {
+  background: #27ae60;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .header {
+    padding: 1rem 1.5rem;
+  }
+
+  .logo {
+    font-size: 1.2rem;
+  }
+
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+  }
+
+  .section {
+    padding: 3rem 1rem;
+  }
+
+  .menu-grouped-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 0 0.5rem;
+  }
+
+  .menu-subcategory-group {
+    padding: 1.5rem;
+  }
+
+  .subcategory-title {
+    font-size: 1.5rem;
+  }
+
+  .item-name {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header nav {
+    display: none;
+    /* Consider a mobile menu later if needed */
+  }
+
+  .hero {
+    height: 70vh;
+  }
+
+  .intro-card {
+    width: 100%;
+  }
+
+  .floating-cart {
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+  }
 }

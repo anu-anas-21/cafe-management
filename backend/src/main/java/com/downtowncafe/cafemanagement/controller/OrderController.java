@@ -55,7 +55,19 @@ public class OrderController {
         return convertToDTO(savedOrder);
     }
 
+    @PutMapping("/orders/{id}/status")
+    public OrderDTO updateOrderStatus(@PathVariable String id, @RequestBody StatusUpdateRequest request) {
+        CustomerOrder order = orderRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Order not found with id: " + id));
+        order.setStatus(request.status());
+        CustomerOrder updatedOrder = orderRepository.save(order);
+        return convertToDTO(updatedOrder);
+    }
+
     public record OrderRequest(String tableNumber, List<MenuItemDTO> items) {
+    }
+
+    public record StatusUpdateRequest(String status) {
     }
 
     private OrderDTO convertToDTO(CustomerOrder order) {

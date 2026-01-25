@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { content as fallbackContent } from '../data/content';
-import { addMenu } from '../services/api';
 import AdminLoginModal from './AdminLoginModal'; // Import Login Modal
 import './LandingPage.css';
 
@@ -24,21 +23,48 @@ const AdminOrdersModal = ({ isOpen, onClose }) => {
             <div className="modal-content admin-orders-content">
                 <h2>Active Orders</h2>
                 <div className="orders-list">
-                    {(!orders || orders.length === 0) ? <p>No active orders.</p> : orders.map((order, idx) => (
-                        <div key={idx} className="order-card">
-                            <div className="order-header">
-                                <span>Table: {order.tableNumber || "N/A"}</span>
-                                <span>{order.timestamp ? new Date(order.timestamp).toLocaleTimeString() : ""}</span>
-                                <span className={`status ${order.status}`}>{order.status}</span>
+                    {(!orders || orders.length === 0) ? <p>No active orders.</p> : orders.map((order, idx) => {
+                        const updateStatus = async (newStatus) => {
+                            try {
+                                const response = await fetch(`http://localhost:8080/api/orders/${order.id}/status`, {
+                                    method: 'PUT',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ status: newStatus })
+                                });
+                                if (response.ok) {
+                                    // Refresh orders list
+                                    const updatedOrders = orders.map(o => o.id === order.id ? { ...o, status: newStatus } : o);
+                                    setOrders(updatedOrders);
+                                }
+                            } catch (err) {
+                                console.error("Error updating status:", err);
+                            }
+                        };
+
+                        return (
+                            <div key={idx} className="order-card">
+                                <div className="order-header">
+                                    <span>Table: {order.tableNumber || "N/A"}</span>
+                                    <span>{order.timestamp ? new Date(order.timestamp).toLocaleTimeString() : ""}</span>
+                                    <span className={`status ${order.status}`}>{order.status}</span>
+                                </div>
+                                <ul className="order-items-list">
+                                    {(order.items || []).map((item, i) => (
+                                        <li key={i}>{item.name} - {item.price} AED</li>
+                                    ))}
+                                </ul>
+                                <div className="order-total">Total: {order.total} AED</div>
+                                {order.status === 'PENDING' && (
+                                    <button
+                                        onClick={() => updateStatus('SERVED')}
+                                        className="serve-btn"
+                                    >
+                                        Mark as Served
+                                    </button>
+                                )}
                             </div>
-                            <ul className="order-items-list">
-                                {(order.items || []).map((item, i) => (
-                                    <li key={i}>{item.name} - {item.price} AED</li>
-                                ))}
-                            </ul>
-                            <div className="order-total">Total: {order.total} AED</div>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
                 <div className="modal-actions">
                     <button onClick={onClose} className="cancel-btn">Close</button>
@@ -57,7 +83,7 @@ const LandingPage = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isAdminLoginOpen, setIsAdminLoginOpen] = useState(false);
 
-    const fetchData = () => {
+    const fetchData = useCallback(() => {
         fetch('http://localhost:8080/api/menu')
             .then(res => res.json())
             .then(backendData => {
@@ -75,9 +101,9 @@ const LandingPage = () => {
                 setData(fallbackContent);
                 setLoading(false);
             });
-    };
+    }, [activeTab]);
 
-    useEffect(() => { fetchData(); }, []);
+    useEffect(() => { fetchData(); }, [fetchData]);
 
     const addToCart = (item) => {
         setCart([...cart, item]);
@@ -127,7 +153,10 @@ const LandingPage = () => {
                             {item.label}
                         </a>
                     ))}
-                    {/* Admin Access hidden in nav or triggered via secret/button */}
+                    {/* Admin Access moved here */}
+                    <button className="admin-nav-button" onClick={handleAdminAccess}>
+                        Admin
+                    </button>
                 </nav>
             </header>
 
@@ -204,14 +233,6 @@ const LandingPage = () => {
                     )}
                 </div>
 
-                <div className="menu-actions">
-                    <button className="secondary-button" onClick={() => window.open("https://drive.google.com/file/d/1K2k1iDkkdEFgN0rQO80NhopdLpPmetx6/view", "_blank")}>
-                        {data.interface.viewFullMenu}
-                    </button>
-                    <button className="admin-button" onClick={handleAdminAccess}>
-                        Admin Orders
-                    </button>
-                </div>
             </section>
 
             {/* Floating Cart */}
