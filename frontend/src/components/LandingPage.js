@@ -181,9 +181,9 @@ const LandingPage = () => {
                 <h2>Our Ambience</h2>
                 <div className="photo-grid">
                     <img src={interior} alt="Cafe Interior" />
-                    <img src="C:\Anu\Spring Boot\cafe-management\frontend\src\Photos\Coffee.png" alt="Coffee Art" />
-                    <img src="C:\Anu\Spring Boot\cafe-management\frontend\src\Photos\Beans.png" alt="Beans" />
-                    <img src="C:\Anu\Spring Boot\cafe-management\frontend\src\Photos\Cake.png" alt="Social" />
+                    <img src={coffee} alt="Coffee Art" />
+                    <img src={beans} alt="Beans" />
+                    <img src={cake} alt="Social" />
                 </div>
             </section>
 
