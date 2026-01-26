@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const API = "http://localhost:8080/api/menu";
+const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
+const API = `${API_BASE_URL}/api/menu`;
 
 export const getMenu = () => axios.get(API);
 export const addMenu = (item) => axios.post(API, item);

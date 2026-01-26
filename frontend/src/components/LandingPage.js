@@ -7,13 +7,15 @@ import coffee from "../Photos/Coffee.png";
 import beans from "../Photos/Beans.png";
 import cake from "../Photos/Cake.png";
 
+const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
+
 // Admin Order View Component (Internal)
 const AdminOrdersModal = ({ isOpen, onClose }) => {
     const [orders, setOrders] = useState([]);
 
     useEffect(() => {
         if (isOpen) {
-            fetch('http://localhost:8080/api/orders')
+            fetch(`${API_BASE_URL}/api/orders`)
                 .then(res => res.json())
                 .then(setOrders)
                 .catch(err => console.error("Error fetching orders:", err));
@@ -30,7 +32,7 @@ const AdminOrdersModal = ({ isOpen, onClose }) => {
                     {(!orders || orders.length === 0) ? <p>No active orders.</p> : orders.map((order, idx) => {
                         const updateStatus = async (newStatus) => {
                             try {
-                                const response = await fetch(`http://localhost:8080/api/orders/${order.id}/status`, {
+                                const response = await fetch(`${API_BASE_URL}/api/orders/${order.id}/status`, {
                                     method: 'PUT',
                                     headers: { 'Content-Type': 'application/json' },
                                     body: JSON.stringify({ status: newStatus })
@@ -89,7 +91,7 @@ const LandingPage = () => {
     const [isAdminLoginOpen, setIsAdminLoginOpen] = useState(false);
 
     const fetchData = useCallback(() => {
-        fetch('http://localhost:8080/api/menu')
+        fetch(`${API_BASE_URL}/api/menu`)
             .then(res => res.json())
             .then(backendData => {
                 setData({
@@ -120,7 +122,7 @@ const LandingPage = () => {
         if (!tableNumber) return;
 
         try {
-            const response = await fetch('http://localhost:8080/api/orders', {
+            const response = await fetch(`${API_BASE_URL}/api/orders`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ tableNumber, items: cart })
