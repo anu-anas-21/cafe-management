@@ -176,10 +176,10 @@ const LandingPage = () => {
             <section id="photos" className="section photos-section">
                 <h2>Our Ambience</h2>
                 <div className="photo-grid">
-                    <img src="https://i.ibb.co/9kK7F397/Screenshot-2026-01-26-002039.png" alt="Cafe Interior" />
-                    <img src="https://i.ibb.co/whTj4m1T/Screenshot-2026-01-26-002201.png " alt="Coffee Art" />
-                    <img src="https://i.ibb.co/0jBh7hM9/Screenshot-2026-01-26-002113.png" alt="Beans" />
-                    <img src="https://i.ibb.co/b4w271p/Screenshot-2026-01-26-003340.png" alt="Social" />
+                    <img src="C:\Anu\Spring Boot\cafe-management\frontend\src\Photos\Interior.png" alt="Cafe Interior" />
+                    <img src="C:\Anu\Spring Boot\cafe-management\frontend\src\Photos\Coffee.png" alt="Coffee Art" />
+                    <img src="C:\Anu\Spring Boot\cafe-management\frontend\src\Photos\Beans.png" alt="Beans" />
+                    <img src="C:\Anu\Spring Boot\cafe-management\frontend\src\Photos\Cake.png" alt="Social" />
                 </div>
             </section>
 
