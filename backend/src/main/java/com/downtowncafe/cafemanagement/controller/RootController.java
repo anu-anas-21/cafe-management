@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class RootController {
 
     @GetMapping("/")
