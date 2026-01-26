@@ -2,6 +2,10 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { content as fallbackContent } from '../data/content';
 import AdminLoginModal from './AdminLoginModal'; // Import Login Modal
 import './LandingPage.css';
+import interior from "../Photos/Interior.png";
+import coffee from "../Photos/Coffee.png";
+import beans from "../Photos/Beans.png";
+import cake from "../Photos/Cake.png";
 
 // Admin Order View Component (Internal)
 const AdminOrdersModal = ({ isOpen, onClose }) => {
@@ -176,7 +180,7 @@ const LandingPage = () => {
             <section id="photos" className="section photos-section">
                 <h2>Our Ambience</h2>
                 <div className="photo-grid">
-                    <img src="src\Photos\Interior.png" alt="Cafe Interior" />
+                    <img src={interior} alt="Cafe Interior" />
                     <img src="C:\Anu\Spring Boot\cafe-management\frontend\src\Photos\Coffee.png" alt="Coffee Art" />
                     <img src="C:\Anu\Spring Boot\cafe-management\frontend\src\Photos\Beans.png" alt="Beans" />
                     <img src="C:\Anu\Spring Boot\cafe-management\frontend\src\Photos\Cake.png" alt="Social" />
