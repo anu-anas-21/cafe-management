@@ -23,9 +23,12 @@ export const content = {
     artisanPastries: "Hand-crafted daily by our resident patissier, pairing perfectly with our specialty coffees."
   },
   footer: {
-    address: "Sheraton Khalidiya Hotel Ground floor - Al Hisn - W7 01 - Abu Dhabi. Contact: 02 692 8500",
-    hours: "Open Daily: 8:00 AM - 2:00 AM",
-    socialCta: "Instagram: @downtown.sheraton"
+    address: "Sheraton Khalidiya Hotel Ground floor - Al Hisn - W7 01 - Abu Dhabi - United Arab Emirates",
+    plusCode: "Plus Code: F8FX+XQ Abu Dhabi - United Arab Emirates",
+    phone: "+971 2 692 8500",
+    whatsapp: "+971 2 692 8500",
+    instagram: "www.instagram.com/downtown.sheraton",
+    hours: "Open daily 8:00 AM - 2:00 AM"
   },
   menuItems: {
   }

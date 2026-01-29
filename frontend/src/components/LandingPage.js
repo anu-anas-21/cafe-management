@@ -285,9 +285,24 @@ const LandingPage = () => {
             />
 
             <footer id="footer" className="footer">
-                <p>{data.footer.address}</p>
-                <p>{data.footer.hours}</p>
-                <p className="social">{data.footer.socialCta}</p>
+                <div className="footer-content">
+                    <div className="footer-section">
+                        <h3>Location</h3>
+                        <p>{data.footer.address}</p>
+                        <p className="plus-code">{data.footer.plusCode}</p>
+                    </div>
+                    <div className="footer-section">
+                        <h3>Contact</h3>
+                        <p>Phone: <a href={`tel:${data.footer.phone}`}>{data.footer.phone}</a></p>
+                        <p>WhatsApp: <a href={`https://wa.me/${(data.footer.whatsapp || "").replace(/\s+/g, '')}`} target="_blank" rel="noopener noreferrer">{data.footer.whatsapp}</a></p>
+                        <p>Instagram: <a href={`https://${data.footer.instagram}`} target="_blank" rel="noopener noreferrer">downtown.sheraton</a></p>
+                    </div>
+                    <div className="footer-section">
+                        <h3>Hours</h3>
+                        <p>{data.footer.hours}</p>
+                    </div>
+                </div>
+                <p className="footer-bottom">&copy; {new Date().getFullYear()} Downtown Restaurant and Lounge. All Rights Reserved.</p>
             </footer>
         </div>
     );

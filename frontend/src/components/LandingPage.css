@@ -38,8 +38,11 @@ body {
   padding: 1.5rem 4rem;
   background-color: rgba(0, 26, 51, 0.95);
   backdrop-filter: blur(10px);
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
   z-index: 1000;
   border-bottom: 1px solid var(--glass-border);
 }
@@ -359,24 +362,60 @@ body {
 
 /* Footer */
 .footer {
-  background-color: #000d1a;
-  /* Depth Navy */
+  background-color: #000a14;
   color: var(--text-muted);
-  padding: 5rem 2rem;
+  padding: 4rem 2rem 2rem;
   text-align: center;
   border-top: 1px solid var(--glass-border);
 }
 
-.footer p {
-  margin-bottom: 0.8rem;
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: left;
 }
 
-.footer .social {
-  margin-top: 2rem;
+.footer-section h3 {
   color: var(--accent-color);
-  font-weight: bold;
-  cursor: pointer;
-  font-size: 1.1rem;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.footer-section p {
+  line-height: 1.6;
+  margin-bottom: 0.8rem;
+  font-size: 0.95rem;
+}
+
+.footer-section a {
+  color: var(--text-light);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-section a:hover {
+  color: var(--accent-color);
+}
+
+.plus-code {
+  color: var(--accent-color);
+  font-weight: 500;
+  font-size: 0.9rem !important;
+}
+
+.footer-bottom {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: center;
 }
 
 .menu-grouped-grid {
