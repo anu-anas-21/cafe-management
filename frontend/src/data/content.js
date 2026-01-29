@@ -10,12 +10,12 @@ export const content = {
     ]
   },
   hero: {
-    headline: "Downtown Cafe at Sheraton Khalidiya",
+    headline: "Downtown Restaurant and Lounge Sheraton Khalidiya",
     subHeadline: "A contemporary retreat on the Ground Floor. Experience a fusion of international and local cuisines in a sophisticated, modern setting."
   },
   hotelInfo: {
-    title: "About Downtown Cafe",
-    description: "Located in the heart of Abu Dhabi at the Sheraton Khalidiya Hotel, Downtown Cafe is your perfect spot for a romantic evening or a casual business meeting. Open daily from 8 AM to 2 AM, we serve everything from signature sushi and grilled meats to artisan pastries and specialty coffees. Enjoy our wireless internet and warm, welcoming service."
+    title: "Downtown Restaurant and Lounge Sheraton Khalidiya",
+    description: "Located in the heart of Abu Dhabi at the Sheraton Khalidiya Hotel, Downtown Restaurant and Lounge is your perfect spot for a romantic evening or a casual business meeting. Open daily from 8 AM to 2 AM, we serve everything from signature sushi and grilled meats to artisan pastries and specialty coffees. Enjoy our wireless internet and warm, welcoming service."
   },
   menuExperience: {
     signatureBlends: "Masterfully roasted beans sourced from the world's finest estates, brewed to perfection.",

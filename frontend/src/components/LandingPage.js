@@ -153,7 +153,7 @@ const LandingPage = () => {
     return (
         <div className="landing-page">
             <header className="header">
-                <div className="logo">Downtown Cafe</div>
+                <div className="logo">Downtown Restaurant and Lounge</div>
                 <nav>
                     {data.header.navigation.map((item, index) => (
                         <a key={index} href={item.href} target={item.external ? "_blank" : "_self"} rel={item.external ? "noopener noreferrer" : ""}>
@@ -182,7 +182,7 @@ const LandingPage = () => {
             <section id="photos" className="section photos-section">
                 <h2>Our Ambience</h2>
                 <div className="photo-grid">
-                    <img src={interior} alt="Cafe Interior" />
+                    <img src={interior} alt="Restaurant Interior" />
                     <img src={coffee} alt="Coffee Art" />
                     <img src={beans} alt="Beans" />
                     <img src={cake} alt="Social" />
