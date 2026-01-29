@@ -167,10 +167,19 @@ const LandingPage = () => {
                 </nav>
             </header>
 
-            <section id="hero" className="hero">
-                <div className="hero-content">
-                    <h1>{data.hero.headline}</h1>
-                    <p>{data.hero.subHeadline}</p>
+            <section id="hero" className="hero-video-container">
+                {/* Animated CSS Gradient Background */}
+                <div className="ambient-glow"></div>
+                <div className="gold-dust">
+                    {[...Array(12)].map((_, i) => (
+                        <div key={i} className="particle"></div>
+                    ))}
+                </div>
+
+                <div className="video-overlay">
+                    <h1>DOWNTOWN</h1>
+                    <p>RESTAURANT & LOUNGE</p>
+                    <span className="location">Sheraton Khalidiya, Abu Dhabi</span>
                 </div>
             </section>
 
@@ -284,25 +293,27 @@ const LandingPage = () => {
                 }}
             />
 
-            <footer id="footer" className="footer">
-                <div className="footer-content">
-                    <div className="footer-section">
+            <section id="contact" className="contact-section">
+                <div className="contact-container">
+                    <div className="contact-block">
                         <h3>Location</h3>
                         <p>{data.footer.address}</p>
                         <p className="plus-code">{data.footer.plusCode}</p>
                     </div>
-                    <div className="footer-section">
-                        <h3>Contact</h3>
+                    <div className="contact-block">
+                        <h3>Connect</h3>
                         <p>Phone: <a href={`tel:${data.footer.phone}`}>{data.footer.phone}</a></p>
                         <p>WhatsApp: <a href={`https://wa.me/${(data.footer.whatsapp || "").replace(/\s+/g, '')}`} target="_blank" rel="noopener noreferrer">{data.footer.whatsapp}</a></p>
                         <p>Instagram: <a href={`https://${data.footer.instagram}`} target="_blank" rel="noopener noreferrer">downtown.sheraton</a></p>
                     </div>
-                    <div className="footer-section">
-                        <h3>Hours</h3>
+                    <div className="contact-block">
+                        <h3>Opening Hours</h3>
                         <p>{data.footer.hours}</p>
                     </div>
                 </div>
-                <p className="footer-bottom">&copy; {new Date().getFullYear()} Downtown Restaurant and Lounge. All Rights Reserved.</p>
+            </section>
+
+            <footer className="footer" style={{ display: 'none' }}>
             </footer>
         </div>
     );
