@@ -6,7 +6,6 @@ import interior from "../Photos/Interior.png";
 import coffee from "../Photos/Coffee.png";
 import beans from "../Photos/Beans.png";
 import cake from "../Photos/Cake.png";
-import logo from "../assets/logo.svg";
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
 
