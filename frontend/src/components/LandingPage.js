@@ -6,6 +6,7 @@ import interior from "../Photos/Interior.png";
 import coffee from "../Photos/Coffee.png";
 import beans from "../Photos/Beans.png";
 import cake from "../Photos/Cake.png";
+import logo from "../assets/logo.svg";
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
 
@@ -153,7 +154,9 @@ const LandingPage = () => {
     return (
         <div className="landing-page">
             <header className="header">
-                <div className="logo">Downtown Restaurant and Lounge</div>
+                <div className="logo header-logo">
+                    <span className="down-text">D<span className="styled-o">o</span>wn</span><span className="town-text">T<span className="styled-o">o</span>wn</span>
+                </div>
                 <nav>
                     {data.header.navigation.map((item, index) => (
                         <a key={index} href={item.href} target={item.external ? "_blank" : "_self"} rel={item.external ? "noopener noreferrer" : ""}>
@@ -177,7 +180,11 @@ const LandingPage = () => {
                 </div>
 
                 <div className="video-overlay">
-                    <h1>DOWNTOWN</h1>
+                    <div className="logo-wrapper">
+                        <div className="logo-container">
+                            <span className="down-text">D<span className="styled-o">o</span>wn</span><span className="town-text">T<span className="styled-o">o</span>wn</span>
+                        </div>
+                    </div>
                     <p>RESTAURANT & LOUNGE</p>
                     <span className="location">Sheraton Khalidiya, Abu Dhabi</span>
                 </div>
