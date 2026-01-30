@@ -3,8 +3,8 @@
 A premium, full-stack cafe management and online ordering solution. This system allows customers to browse a digital menu and place orders, while providing an administrative dashboard for order tracking and management.
 
 ## Live Demo
-- **Backend:** [Link to your Render URL]
-- **Frontend:** [Link to your Vercel/Netlify URL]
+- **Backend:** https://cafe-management-1-062b.onrender.com/
+- **Frontend:** https://down-town-cafe.vercel.app/
 
 ## Features
 - **Dynamic Digital Menu:** Beautifully categorized menu with real-time updates.
