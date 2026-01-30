@@ -319,7 +319,38 @@ const LandingPage = () => {
                 </div>
             </section>
 
-            <footer className="footer" style={{ display: 'none' }}>
+            <footer className="cafe-footer">
+                <div className="footer-container">
+                    <div className="footer-col quick-links">
+                        <h3 className="sr-only">Quick Links</h3>
+                        <ul className="footer-links-inline">
+                            <li>
+                                <a href={`https://${data.footer.instagram}`} target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
+                                    <img className="footer-icon" src="/icons/instagram.svg" alt="Instagram" />
+                                    <span className="sr-only">Instagram</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href={`https://wa.me/${(data.footer.whatsapp || '').replace(/\s+/g, '')}`} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" title="WhatsApp">
+                                    <img className="footer-icon" src="/icons/whatsapp.svg" alt="WhatsApp" />
+                                    <span className="sr-only">WhatsApp</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href={`tel:${data.footer.phone}`} aria-label="Phone" title="Phone">
+                                    <img className="footer-icon" src="/icons/phone.svg" alt="Phone" />
+                                    <span className="sr-only">Phone</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://maps.app.goo.gl/pSsUZLeYYkEdC7cXA" target="_blank" rel="noopener noreferrer" aria-label="Map" title="Map">
+                                    <img className="footer-icon" src="/icons/map.svg" alt="Map" />
+                                    <span className="sr-only">Google Map</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </footer>
         </div>
     );
