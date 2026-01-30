@@ -6,7 +6,7 @@ export const content = {
       { label: "About", href: "#hotel-info" },
       { label: "Menu", href: "https://drive.google.com/file/d/1K2k1iDkkdEFgN0rQO80NhopdLpPmetx6/view", external: true },
       { label: "Photos", href: "#photos" },
-      { label: "Contact", href: "#footer" }
+      { label: "Contact", href: "#contact" }
     ]
   },
   hero: {
@@ -29,9 +29,6 @@ export const content = {
     whatsapp: "+971 2 692 8500",
     instagram: "www.instagram.com/downtown.sheraton",
     hours: "Open daily 8:00 AM - 2:00 AM",
-    videos: [
-      "/videos/videoplayback (4).mp4"
-    ]
   },
   menuItems: {
   }
